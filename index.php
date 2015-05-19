@@ -1,7 +1,9 @@
 <?php
 
-// Kickstart the framework
-$f3=require('lib/base.php');
+// Composer autoloader for required packages and dependencies
+require_once('lib/autoload.php');
+
+$f3 = \Base::instance();
 
 $f3->set('DEBUG',1);
 if ((float)PCRE_VERSION<7.9)
@@ -19,7 +21,7 @@ $f3->set('DB', new DB\SQL(
 
 // Routing scheme. Set the news page as our index and route all requests to their corresponding controllers
 // @controller -> @action (@param, optionally)
-$f3->route('GET|POST /', 'Controllers\News->index');
+$f3->route('GET|POST /', 'Controllers\Welcome->index');
 $f3->route('GET|POST /@controller', 'Controllers\@controller->index');
 $f3->route('GET|POST /@controller/@action', 'Controllers\@controller->@action');
 $f3->route('GET|POST /@controller/@action/@param', 'Controllers\@controller->@action');
